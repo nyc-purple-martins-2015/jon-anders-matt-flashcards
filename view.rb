@@ -19,6 +19,10 @@ class View
     puts "\nWelcome to flashcards.  You killed my father.  Prepare to die.\n"
   end
 
+  def deck_select
+    puts "\nPlease enter file path for your deck or hit enter and I will choose the easiest one for you."
+  end
+
   def game_over
     puts "GAME OVER"
   end
@@ -52,7 +56,7 @@ class View
     puts "If you are a quitting quitter who wants to quit type 'QUIT', loser!"
     puts "If you want to try and fail again, type 'AGAIN'."
     puts "Otherwise hit any key."
-    sleep(0.5)
+    sleep(0.25)
     puts "(I suggest you 'QUIT')"
   end
 

@@ -6,13 +6,23 @@ require_relative './view'
 
 $quitter = false
 
-parser = Parser.new
 view = View.new
+view.start_message
+view.deck_select
+
+choice=view.get_user_input
+if choice != ""
+  parser = Parser.new(choice)
+else
+  parser=Parser.new
+end
+
 deck = parser.parse_file
 
 controller_info={parser: parser, view: view, deck: deck}
 
-view.start_message
+
+
 
 def specific_card(args, card)
   view = args[:view]
@@ -43,5 +53,5 @@ while !deck.game_over? && !$quitter
 end
 
 # if deck
-
+view.win_message if !$quitter
 view.game_over
