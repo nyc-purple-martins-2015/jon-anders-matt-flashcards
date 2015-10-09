@@ -6,7 +6,6 @@ class View
 
   end
 
-
   def show_card_def(card)
     puts card.definition
   end
@@ -53,11 +52,6 @@ class View
     puts "Otherwise hit any key."
     sleep(0.5)
     puts "(I suggest you 'QUIT')"
-    gets.chomp
   end
 
 end
-viewer = View.new
-
-viewer.incorrect_message
-viewer.correct_message
