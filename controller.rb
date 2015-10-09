@@ -34,6 +34,7 @@ def specific_card(args, card)
     else
       view.incorrect_message
       card.number_of_incorrect_guesses += 1
+      view.options
       case view.get_user_input
       when "QUIT"
         view.lose_message
@@ -41,18 +42,22 @@ def specific_card(args, card)
         return
       when "AGAIN"
         specific_card(args, card)
+      when "ANSWER"
+        view.view_answer(card)
+      when "GUESSES"
+        view.view_guesses(card)
+        view.try_again
+        specific_card(args, card) if view.get_user_input == 'YES'
       else
 
       end
     end
   end
 
-
 while !deck.game_over? && !$quitter
   card = deck.pick_card
   specific_card(controller_info, card)
 end
 
-# if deck
 view.win_message if !$quitter
 view.game_over
