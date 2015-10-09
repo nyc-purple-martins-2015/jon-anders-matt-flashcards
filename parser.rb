@@ -5,14 +5,15 @@ require_relative 'deck'
 class Parser
 
 
+
   def initialize(filename='./flashcards.csv')
     @filename = filename
-    @parser_array = []
+    @deck = nil
   end
 
-  def parse_file
+  def parse_file(the_file = @filename)
     stack = []
-        CSV.foreach(filename, :col_sep => '|', :headers=> ["word","definition"], :header_converters=> :symbol,
+        CSV.foreach(the_file, :col_sep => '|', :headers=> ["word","definition"], :header_converters=> :symbol,
           :converters => :all) do |row|
       stack << Card.new(row)
     end
