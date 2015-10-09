@@ -10,5 +10,14 @@ class Card
     @number_of_incorrect_guesses = 0
   end
 
+# card word is equal to the word passed in as a parameter
+  def correct?(word)
+    if @word == word
+      @guessed_correctly = true
+      return true
+    end
+    false
+  end
+
 
 end
