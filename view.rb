@@ -57,7 +57,4 @@ class View
   end
 
 end
-viewer = View.new
 
-viewer.incorrect_message
-viewer.correct_message
