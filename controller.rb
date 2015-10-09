@@ -6,13 +6,23 @@ require_relative './view'
 
 $quitter = false
 
-parser = Parser.new
 view = View.new
+view.start_message
+view.deck_select
+
+choice=view.get_user_input
+if choice != ""
+  parser = Parser.new(choice)
+else
+  parser=Parser.new
+end
+
 deck = parser.parse_file
 
 controller_info={parser: parser, view: view, deck: deck}
 
-view.start_message
+
+
 
 def specific_card(args, card)
   view = args[:view]
@@ -23,6 +33,8 @@ def specific_card(args, card)
       view.correct_message
     else
       view.incorrect_message
+      card.number_of_incorrect_guesses += 1
+      view.options
       case view.get_user_input
       when "QUIT"
         view.lose_message
@@ -30,18 +42,22 @@ def specific_card(args, card)
         return
       when "AGAIN"
         specific_card(args, card)
+      when "ANSWER"
+        view.view_answer(card)
+      when "GUESSES"
+        view.view_guesses(card)
+        view.try_again
+        specific_card(args, card) if view.get_user_input == 'YES'
       else
 
       end
     end
   end
 
-
 while !deck.game_over? && !$quitter
   card = deck.pick_card
   specific_card(controller_info, card)
 end
 
-# if deck
-
+view.win_message if !$quitter
 view.game_over
