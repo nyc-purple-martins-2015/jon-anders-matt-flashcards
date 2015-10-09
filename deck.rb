@@ -7,7 +7,7 @@ attr_reader :deck_of_cards
   end
 # returns true if the game is over (all cards guessed correctly)
   def game_over?
-    deck.all?{|card| card.guessed_correctly}
+    deck_of_cards.all?{|card| card.guessed_correctly}
   end
 # shuffles the deck
   def shuffle
