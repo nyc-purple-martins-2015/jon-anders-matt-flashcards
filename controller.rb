@@ -33,6 +33,7 @@ def specific_card(args, card)
       view.correct_message
     else
       view.incorrect_message
+      card.number_of_incorrect_guesses += 1
       case view.get_user_input
       when "QUIT"
         view.lose_message
